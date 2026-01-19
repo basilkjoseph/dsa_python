@@ -12,10 +12,9 @@ Hi! 👋 This repository is my personal space to learn, practice, and share **Da
 ✅ **DSA Progress:**  
 - Started with **Graph Algorithms**  
   - Basic graph traversals (DFS, BFS)
-  - Sample problems solved from LeetCode
 
 ✅ **LeetCode:**  
-- Solving problems daily and pushing solutions regularly
+- Solving problems and pushing solutions regularly
 
 ---
 
