@@ -12,6 +12,9 @@ Hi! 👋 This repository is my personal space to learn, practice, and share **Da
 ✅ **DSA Progress:**  
 - Started with **Graph Algorithms**  
   - Basic graph traversals (DFS, BFS)
+  - Dijstra algorithm
+  - Bellman ford Algorithm
+  - Kruskals Algorithm
 
 ✅ **LeetCode:**  
 - Solving problems and pushing solutions regularly
