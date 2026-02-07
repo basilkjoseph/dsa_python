@@ -56,3 +56,67 @@ class Solution:
             k -= 1  # Try next smaller size
         
         return 1  # Minimum magic square size is always 1        
+
+
+
+    def largestMagicSquare_optimized(self, grid: List[List[int]]) -> int:
+        """Optimized search using prefix sums for row/column sums.
+
+        Uses row and column prefix sums to compute row/column sums in O(1)
+        for any sub-row or sub-column. Diagonals are computed directly.
+        The function tries square sizes from largest to smallest and returns
+        the first (largest) valid magic square size found.
+        """
+        m = len(grid)
+        n = len(grid[0])
+
+        # rowPrefix[i][j] = sum of grid[i][0..j]
+        rowPrefix = [[0] * n for _ in range(m)]
+        # colPrefix[i][j] = sum of grid[0..i][j]
+        colPrefix = [[0] * n for _ in range(m)]
+
+        # Build row prefix sums
+        for i in range(m):
+            rowPrefix[i][0] = grid[i][0]
+            for j in range(1, n):
+                rowPrefix[i][j] = rowPrefix[i][j - 1] + grid[i][j]
+
+        # Build column prefix sums
+        for j in range(n):
+            colPrefix[0][j] = grid[0][j]
+            for i in range(1, m):
+                colPrefix[i][j] = colPrefix[i - 1][j] + grid[i][j]
+
+        # Try square sizes from largest to smallest
+        for size in range(min(m, n), 1, -1):
+            for i in range(m - size + 1):
+                for j in range(n - size + 1):
+                    # Collect all row sums, column sums and diagonal sums
+                    magicSum = set()
+                    diagSum = 0
+                    antiDiagSum = 0
+
+                    # Add row sums for each row in the square using rowPrefix
+                    for x in range(i, i + size):
+                        row_sum = rowPrefix[x][j + size - 1] - (0 if j == 0 else rowPrefix[x][j - 1])
+                        magicSum.add(row_sum)
+
+                    # Add column sums for each column in the square using colPrefix
+                    for y in range(j, j + size):
+                        col_sum = colPrefix[i + size - 1][y] - (0 if i == 0 else colPrefix[i - 1][y])
+                        magicSum.add(col_sum)
+
+                    # Compute main and anti-diagonal sums directly
+                    for d in range(size):
+                        diagSum += grid[i + d][j + d]
+                        antiDiagSum += grid[i + d][j + size - 1 - d]
+
+                    magicSum.add(diagSum)
+                    magicSum.add(antiDiagSum)
+
+                    # If all sums are equal, we found a magic square
+                    if len(magicSum) == 1:
+                        return size
+
+        return 1
+                
