@@ -1,20 +1,20 @@
 from typing import List
 
+
 class Solution:
-    def dfs(self,node,paths,graph):
-        if paths[node]==[-1]:
-            paths[node]=[]
-            for child in graph[node]:
-                subs_path=self.dfs(child,paths,graph)
-                for sp in subs_path:
-                    paths[node].append([node]+sp)
-        return paths[node]
-
-
+    def dfs(self,graph,node,paths,allPaths):
+        paths.append(node)
+        if node==len(graph)-1:
+            allPaths.append(paths[:])
+            return
+        for child in graph[node]:
+            self.dfs(graph,child,paths,allPaths)
+            paths.pop()
     def allPathsSourceTarget(self, graph: List[List[int]]) -> List[List[int]]:
-        
-        n=len(graph)
-        paths=[[-1] for _ in range(n)]
-        self.dfs(0,paths,graph)
-        return paths[0]
+        paths=list()
+        allPaths=list()
+        self.dfs(graph,0,paths,allPaths)
+        return allPaths
+
+
         
