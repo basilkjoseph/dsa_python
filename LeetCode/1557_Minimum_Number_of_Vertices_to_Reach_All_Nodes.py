@@ -9,5 +9,5 @@ class Solution:
         for i,node in enumerate(hash):
             if node==-1:
                 result.append(i)  
-                   
+                
         return result
