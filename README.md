@@ -15,6 +15,7 @@ Hi! 👋 This repository is my personal space to learn, practice, and share **Da
   - Dijstra algorithm
   - Bellman ford Algorithm
   - Kruskals Algorithm
+  - Disjoint Set
 
 ✅ **LeetCode:**  
 - Solving problems and pushing solutions regularly
